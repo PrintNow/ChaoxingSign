@@ -28,6 +28,9 @@ $jar_path = __DIR__ . "/cookie/{$account}.cookie";//保存 Cookie
 //如果存在 cookie 文件，先判断 cookie 是否过期
 if (file_get_contents($jar_path)) {
     goto getCourseList;
+}else{
+    //不存在 cookie 文件，则新建一个
+    file_put_contents($jar_path, "#新建一个保存cookie文件");
 }
 goto takeLogin;//去执行登录操作
 
