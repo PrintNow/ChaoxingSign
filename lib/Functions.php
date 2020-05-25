@@ -1,5 +1,6 @@
 <?php
-define("LOGIN_API", "http://i.chaoxing.com/vlogin?userName=%s&passWord=%s");//登录接口
+//define("LOGIN_API", "http://i.chaoxing.com/vlogin?userName=%s&passWord=%s");//~~登录接口~~ 该接口目前失效
+define("LOGIN_API", "https://passport2-api.chaoxing.com/v11/loginregister?uname=%s&code=%s");//登录接口
 define("COURSE_LIST", "http://mooc1-2.chaoxing.com/visit/interaction");//获取课程 courseId、classId
 define("TASK_ID", "http://mobilelearn.chaoxing.com/widget/pcpick/stu/index?courseId=%s&jclassId=%s");//获取任务 ID
 define("SIGN", "http://mobilelearn.chaoxing.com/widget/sign/pcStuSignController/preSign?activeId=%s&classId=%s&courseId=%s");//获取任务 ID
@@ -64,6 +65,11 @@ function curl_get($url, $cookie_jar)
     curl_setopt($curl, CURLOPT_URL, $url);//登陆后要从哪个页面获取信息
     curl_setopt($curl, CURLOPT_HEADER, false);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+    //取消 SSL 证书验证
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+
     curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4121.0 Safari/537.36 Edg/84.0.495.2");
     curl_setopt($curl, CURLOPT_TIMEOUT, 10);
     curl_setopt($curl, CURLOPT_COOKIEJAR, $cookie_jar); //保存返回的Cookie
