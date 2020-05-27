@@ -5,9 +5,9 @@ include_once __DIR__ . "/Config.php";
 
 $now = date('Hi');
 
-//if($now >= '0800' && $now <= '2200'){}else{
-//    die("仅能在 每天 早上8点到晚上22点之间 签到".PHP_EOL);
-//}
+if($now >= '0800' && $now <= '2200'){}else{
+    die("仅能在 每天 早上8点到晚上22点之间 签到。如果你要修改，请修改 8 行代码".PHP_EOL);
+}
 
 if (is_cli() && isset($argv)) {
     $param = getopt('A:P:');
