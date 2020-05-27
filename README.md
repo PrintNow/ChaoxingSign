@@ -14,15 +14,17 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 # 更新日志
 <details open>
   <summary>2020/05/27</summary>
-    - 修复 #1
-    - 更改 获取课程、签到 API
-    - 添加 手势、位置、二维码一键签到
-    - 添加 Server酱 微信推送，需要配置 `config.php` 文件
+
+- 修复 #1
+- 更改 获取课程、签到 API
+- 添加 手势、位置、二维码一键签到
+- 添加 Server酱 微信推送，需要配置 `config.php` 文件
 </details>
 
 <details>
   <summary>2020/05/25</summary>
-    - 更改 登录接口，原接口已经失效
+
+- 更改 登录接口，原接口已经失效
 </details>
 
 # TODO
