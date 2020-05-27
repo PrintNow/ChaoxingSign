@@ -15,7 +15,7 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 <details open>
   <summary>2020/05/27</summary>
 
-- 修复 <a href="https://github.com/iuap-design/blog/issues/1">#1</a>
+- 修复 <a href="https://github.com/PrintNow/ChaoxingSign/issues/1">#1</a>
 - 更改 获取课程、签到 API
 - 添加 手势、位置、二维码一键签到
 - 添加 Server酱 微信推送，需要配置 `config.php` 文件
