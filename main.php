@@ -83,7 +83,7 @@ getTaskID:
 $taskID = [];
 foreach ($course_list as $val) {
     $html = curl_get(sprintf(TASK_ID, $val['courseId'], $val['classId']), $jar_path);
-    $res = selector::select($html, '#startList > div', 'css');
+    $res = selector::select($html, '#startList div', 'css');
 
     if (isset($res[0])) {
         if (!is_array($res)) continue;
@@ -92,14 +92,16 @@ foreach ($course_list as $val) {
             $d = str_replace(['(', ')', ''], '', $d);
             $d = explode(",", $d);
 
-            if (intval($d[1]) === 2) {
-                $taskID[] = [
-                    $val['courseId'],//课程ID
-                    $val['classId'],//班级ID
-                    $d[0],//签到任务ID
-                    $val['title'],//课程名
-                    $val['teacherName'],//教师名
-                ];
+            if(isset($d[1])){
+                if (intval($d[1]) === 2) {
+                    $taskID[] = [
+                        $val['courseId'],//课程ID
+                        $val['classId'],//班级ID
+                        $d[0],//签到任务ID
+                        $val['title'],//课程名
+                        $val['teacherName'],//教师名
+                    ];
+                }
             }
         }
     }
@@ -115,7 +117,7 @@ if (count($taskID) > 0) {
 }
 
 file_put_contents($signed_path, "");//没有签到任务了，将其置为空
-echo "没有待签到的任务".PHP_EOL;
+echo "[getTaskID]没有待签到的任务".PHP_EOL;
 die;
 
 
@@ -144,7 +146,7 @@ foreach ($taskID as $k => $v) {
 }
 
 //Server酱 微信推送
-if(!empty($msgTmp) && SERVER_CHAN_STATE && isset($config['SERVER_CHAN'][$account])){
+if($msgTmp && SERVER_CHAN_STATE && isset($config['SERVER_CHAN'][strval($account)])){
     if($config['SERVER_CHAN'][$account]['state'] === true){
         $req = sc_send("超星自动签到成功", $msgTmp, $config['SERVER_CHAN'][$account]['SCKEY']);
 
@@ -158,6 +160,8 @@ if(!empty($msgTmp) && SERVER_CHAN_STATE && isset($config['SERVER_CHAN'][$account
             echo $req['errmsg'];
         }
     }
+}else{
+    echo "未配置 Server酱，不推送消息".PHP_EOL;
 }
 
 echo "没有待签到的任务".PHP_EOL;
