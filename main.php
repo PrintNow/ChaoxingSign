@@ -161,7 +161,9 @@ if($msgTmp && SERVER_CHAN_STATE && isset($config['SERVER_CHAN'][strval($account)
         }
     }
 }else{
-    echo "未配置 Server酱，不推送消息".PHP_EOL;
+    if($msgTmp){
+        echo "未配置 Server酱，不推送消息".PHP_EOL;
+    }
 }
 
 echo "没有待签到的任务".PHP_EOL;
