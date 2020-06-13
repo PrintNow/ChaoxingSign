@@ -11,13 +11,32 @@ define("SIGN_API", "https://mobilelearn.chaoxing.com/pptSign/stuSignajax?activeI
 define("SIGN_API_OLD", "http://mobilelearn.chaoxing.com/widget/sign/pcStuSignController/preSign?activeId=%s&classId=%s&courseId=%s");//<旧方法>获取任务 ID
 
 /**
+ * 判断某时间是否在某个区间内
+ * @param int $time 传入秒级时间戳 time()
+ * @param array $timeBetween 传入区间，如 ['08:00:00', '18:00:00']
+ * @return bool true: 在时间区间内，false：不在时间区间内
+ */
+function timeInterval(int $time, array $timeBetween)
+{
+    $checkDayStr = date('Y-m-d', time());
+    $timeBegin = strtotime($checkDayStr . $timeBetween[0]);
+    $timeEnd = strtotime($checkDayStr . $timeBetween[1]);
+
+    if ($time > $timeBegin && $time < $timeEnd) {
+        return true;
+    }
+
+    return false;//不在时间区间内
+}
+
+/**
  * SERVER CHAN 微信推送
- * @param string $text         消息标题，最长为256，必填。
- * @param string $desp         消息内容，最长64Kb，可空，支持MarkDown。
- * @param string $key          获取方式：http://sc.ftqq.com/?c=code
+ * @param string $text 消息标题，最长为256，必填。
+ * @param string $desp 消息内容，最长64Kb，可空，支持MarkDown。
+ * @param string $key 获取方式：http://sc.ftqq.com/?c=code
  * @return false|string
  */
-function sc_send($text='', $desp = '', $key = '')
+function sc_send($text = '', $desp = '', $key = '')
 {
     $postdata = http_build_query(
         array(
@@ -96,7 +115,7 @@ function post($parameter, $default = null, $filter = 'trim')
 /**
  *curl get请求
  */
-function curl_get($url, $cookie_jar='')
+function curl_get($url, $cookie_jar = '')
 {
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);//登陆后要从哪个页面获取信息
@@ -110,7 +129,7 @@ function curl_get($url, $cookie_jar='')
     curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4121.0 Safari/537.36 Edg/84.0.495.2");
     curl_setopt($curl, CURLOPT_TIMEOUT, 10);
 
-    if(!empty($cookie_jar)){
+    if (!empty($cookie_jar)) {
         curl_setopt($curl, CURLOPT_COOKIEJAR, $cookie_jar); //保存返回的Cookie
         curl_setopt($curl, CURLOPT_COOKIEFILE, $cookie_jar); //读取现有Cookie
     }
