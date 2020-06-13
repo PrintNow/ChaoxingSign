@@ -96,7 +96,7 @@ function post($parameter, $default = null, $filter = 'trim')
 /**
  *curl get请求
  */
-function curl_get($url, $cookie_jar)
+function curl_get($url, $cookie_jar='')
 {
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);//登陆后要从哪个页面获取信息
@@ -104,13 +104,17 @@ function curl_get($url, $cookie_jar)
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
     //取消 SSL 证书验证
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
 
     curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4121.0 Safari/537.36 Edg/84.0.495.2");
     curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-    curl_setopt($curl, CURLOPT_COOKIEJAR, $cookie_jar); //保存返回的Cookie
-    curl_setopt($curl, CURLOPT_COOKIEFILE, $cookie_jar); //读取现有Cookie
+
+    if(!empty($cookie_jar)){
+        curl_setopt($curl, CURLOPT_COOKIEJAR, $cookie_jar); //保存返回的Cookie
+        curl_setopt($curl, CURLOPT_COOKIEFILE, $cookie_jar); //读取现有Cookie
+    }
+
     $content = curl_exec($curl);
     curl_close($curl);
 
