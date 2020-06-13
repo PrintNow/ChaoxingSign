@@ -11,7 +11,15 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 
 支持普通签到，手势签到，二维码签到，位置签到，拍照签到
 
-# 更新日志
+# 🎨 更新日志
+<details open>
+  <summary>2020/06/13</summary>
+
+- 修复 <a href="https://github.com/PrintNow/ChaoxingSign/issues/2">#2</a> 的问题，配置了 Server酱但不推送的问题
+- 更改 判断时间区间的方法
+- 添加 获取课程列表失败，重试2次以判断是API错误
+</details>
+
 <details open>
   <summary>2020/05/27</summary>
 
@@ -27,7 +35,7 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 - 更改 登录接口，原接口已经失效
 </details>
 
-# TODO
+# 🎁 TODO
 - [] 接入钉钉机器人 API
 
 # 🧀 使用方法
@@ -60,9 +68,10 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 # √ 运行输出
 签到成功：
 ```
-正在签到：卡路里与健康：教你如......应该签到成功
+正在签到：陈半仙@测试班级
+[2020-06-13 11:44:14]签到成功
 
-正在签到：数据库管理与应用...应该签到成功
+Server酱 消息推送成功
 ```
 
 没有签到任务：
@@ -71,7 +80,7 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 ```
 
 # ❗ 注意
-超星屏蔽了如 阿里云、腾讯云、百度云... 等 IDC IP 地址，故有可能出现未知的错误（我没测试，我仅在家庭宽带中测试成功）
+超星**可能**屏蔽了如 阿里云、腾讯云、百度云... 等 IDC IP 地址，故有可能出现未知的错误（我没测试，我仅在家庭宽带中测试成功）
 
 # 🙇‍ 感谢
 > 本项目的实现参考了以下文章
@@ -82,15 +91,15 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 > 本项目中使用到的 `Selector.php` 来自 [PHPSpider](https://github.com/owner888/phpspider) 
 
 # License
-遵循 [MIT License](./License) 协议
+遵循 [MIT License](./LICENSE) 协议
 
-## 其他签到脚本推荐
-> 排名部分先后
+## 其它版本签到脚本推荐
+> 排名不分先后
 
 | 项目地址                                                | 开发语言   | 备注                                         |
-| ------------------------------------------------------- | ---------- | ------------------------------------------  |
-| https://github.com/Wzb3422/auto-sign-chaoxing           | TypeScript | 超星学习通自动签到，梦中刷网课                |
-| https://github.com/Huangyan0804/AutoCheckin             | Python     | 学习通自动签到，支持手势，二维码，位置，拍照等 |
+| ------------------------------------------------------- | ---------- | ------------------------------------------ |
 | https://github.com/mkdir700/chaoxing_auto_sign          | Python     | 超星学习通自动签到脚本&多用户多任务&API       |
-| https://github.com/aihuahua-522/chaoxing-testforAndroid | Java       | 学习通（超星）自动签到                       |
 | https://github.com/yuban10703/chaoxingsign              | Python     | 超星学习通自动签到                           |
+| https://github.com/Huangyan0804/AutoCheckin             | Python     | 学习通自动签到，支持手势，二维码，位置，拍照等 |
+| https://github.com/Wzb3422/auto-sign-chaoxing           | TypeScript | 超星学习通自动签到，梦中刷网课                |
+| https://github.com/aihuahua-522/chaoxing-testforAndroid | Java       | 学习通（超星）自动签到                       |
