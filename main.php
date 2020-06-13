@@ -3,10 +3,12 @@ include_once __DIR__ . "/lib/Functions.php";
 include_once __DIR__ . "/lib/Selector.php";
 include_once __DIR__ . "/Config.php";
 
-$now = date('Hi');
+$tryLogin = 0;//尝试登录次数
 
-if($now >= '0800' && $now <= '2200'){}else{
-    die("仅能在 每天 早上8点到晚上22点之间 签到。如果你要修改，请修改 8 行代码".PHP_EOL);
+//第二个传入区间，是一个数组
+//['08:00:00', '23:00:00'] 表示仅能在这两个区间内进行签到
+if(timeInterval(time(), ['08:00:00', '23:00:00'])){
+    die("仅能在 每天 早上8点到晚上22点之间 签到。如果你要修改，请修改 10 行代码".PHP_EOL);
 }
 
 if (is_cli() && isset($argv)) {
@@ -44,7 +46,13 @@ getCourseList:
 $getCourseListRes = json_decode(curl_get(COURSE_LIST, $jar_path), true);
 
 if(!isset($getCourseListRes['channelList'])){
-    die("获取课程列表失败，请稍后再试。多次出现此问题请前往 https://github.com/PrintNow/ChaoxingSign 提交 Issues");
+    if($tryLogin > 1){
+        die("[已尝试重新登录2次]获取课程列表失败，请稍后再试。多次出现此问题请前往 https://github.com/PrintNow/ChaoxingSign 提交 Issues".PHP_EOL);
+    }else{
+        $tryLogin += 1;
+        echo "[getCourseList]获取课程列表失败，可能是 cookie 过期，正在尝试第{$tryLogin}次重新登录".PHP_EOL;
+        goto takeLogin;//执行登录，更新 cookie
+    }
 }
 
 $course_list = [];
@@ -136,37 +144,47 @@ foreach ($taskID as $k => $v) {
 
     echo $_2 = PHP_EOL."[".date("Y-m-d H:i:s")."]";
     if($signRes === "success" || $signRes === "您已签到过了"){
-        //改签到加入 签到黑名单，以避免重复签到
+        //该签到加入 签到黑名单，以避免重复签到
         file_put_contents($signed_path, "\n".$v[2], FILE_APPEND);
+        echo $_3 = str_replace("success", "签到成功", $signRes).PHP_EOL.PHP_EOL;
+    }else{
+        echo $_3 = "签到失败，错误原因：{$signRes}";
     }
-
-    echo $_3 = str_replace("success", "签到成功", $signRes).PHP_EOL.PHP_EOL;
 
     $msgTmp .= $_1.$_2.$_3;
 }
 
-//Server酱 微信推送
-if($msgTmp && SERVER_CHAN_STATE && isset($config['SERVER_CHAN'][strval($account)])){
-    if($config['SERVER_CHAN'][$account]['state'] === true){
-        $req = sc_send("超星自动签到成功", $msgTmp, $config['SERVER_CHAN'][$account]['SCKEY']);
+//检查是否包含签到成功，如果包含签到成功 || 签到失败
+//则进行推送
+if(strpos($msgTmp,'签到成功') !== false || strpos($msgTmp,'签到失败') !== false){
 
-        if(!isset($req['errmsg'])){
-            die("Server酱 推送失败，可能是你没有配置 SCKEY，请检查");
-        }
+    //Server酱 微信推送
+    //先检查是否开启推送 以及 是否配置了“Server酱”相关信息
+    if(SERVER_CHAN_STATE && isset($config['SERVER_CHAN'][strval($account)])){
+        //再检查是否开启了推送
+        if($config['SERVER_CHAN'][$account]['state']){
+            $req = sc_send(
+                "超星自动签到成功",
+                str_replace("\n", "\n\n", $msgTmp),//因为 Server酱 两个换行才是换行
+                $config['SERVER_CHAN'][$account]['SCKEY']
+            );
 
-        if($req['errmsg'] === 'success'){
-            echo "Server酱 消息推送成功".PHP_EOL;
-        }else{
-            echo $req['errmsg'];
+            if(!isset($req['errmsg'])){
+                die("Server酱 推送失败，可能是你没有配置 SCKEY，请检查".PHP_EOL);
+            }
+
+            if($req['errmsg'] === 'success'){
+                echo "Server酱 消息推送成功".PHP_EOL;
+            }else{
+                echo "Server酱 消息推送失败，原因：{$req['errmsg']}".PHP_EOL;
+            }
         }
-    }
-}else{
-    if($msgTmp){
+    }else{
         echo "未配置 Server酱，不推送消息".PHP_EOL;
     }
+}else{
+    echo "没有待签到的任务".PHP_EOL;
 }
-
-echo "没有待签到的任务".PHP_EOL;
 die;
 
 
