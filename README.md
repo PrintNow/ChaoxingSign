@@ -99,7 +99,7 @@ Server酱 消息推送成功
 | 项目地址                                                | 开发语言   | 备注                                         |
 | ------------------------------------------------------- | ---------- | ------------------------------------------ |
 | https://github.com/mkdir700/chaoxing_auto_sign          | Python     | 超星学习通自动签到脚本&多用户多任务&API       |
-| https://github.com/yuban10703/chaoxingsign              | Python     | 超星学习通自动签到                           |
-| https://github.com/Huangyan0804/AutoCheckin             | Python     | 学习通自动签到，支持手势，二维码，位置，拍照等 |
 | https://github.com/Wzb3422/auto-sign-chaoxing           | TypeScript | 超星学习通自动签到，梦中刷网课                |
 | https://github.com/aihuahua-522/chaoxing-testforAndroid | Java       | 学习通（超星）自动签到                       |
+| https://github.com/yuban10703/chaoxingsign              | Python     | 超星学习通自动签到                           |
+| https://github.com/Huangyan0804/AutoCheckin             | Python     | 学习通自动签到，支持手势，二维码，位置，拍照等 |
