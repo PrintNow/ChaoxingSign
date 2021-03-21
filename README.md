@@ -13,6 +13,13 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 
 # 🎨 更新日志
 <details open>
+  <summary>2021/03/21</summary>
+
+- <a href="https://github.com/PrintNow/ChaoxingSign/issues/6">#6</a> 升级为新版 Server 酱推送通道，原因：微信发布公告将在2021年4月底下线模板消息，故旧版推送通道将于 2021年4月 下线
+    > 获取本源码后，请配置 `Config.php` 的相关配置
+</details>
+
+<details open>
   <summary>2020/06/13</summary>
 
 - 修复 <a href="https://github.com/PrintNow/ChaoxingSign/issues/2">#2</a> 的问题，配置了 Server酱但不推送的问题
@@ -20,7 +27,7 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 - 添加 获取课程列表失败，重试2次以判断是API错误
 </details>
 
-<details open>
+<details>
   <summary>2020/05/27</summary>
 
 - 修复 <a href="https://github.com/PrintNow/ChaoxingSign/issues/1">#1</a>

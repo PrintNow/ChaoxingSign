@@ -166,7 +166,7 @@ if(strpos($msgTmp,'签到成功') !== false || strpos($msgTmp,'签到失败') !=
             $req = sc_send(
                 "超星自动签到成功",
                 str_replace("\n", "\n\n", $msgTmp),//因为 Server酱 两个换行才是换行
-                $config['SERVER_CHAN'][$account]['SCKEY']
+                $config['SERVER_CHAN'][$account]['SendKey']
             );
 
             if(!isset($req['errmsg'])){
