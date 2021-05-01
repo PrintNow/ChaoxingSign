@@ -13,6 +13,11 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 
 # 🎨 更新日志
 <details open>
+  <summary>2021/05/1</summary>
+
+- 新增`index.html`，采用`post`方式传值到`main.php`,让账号密码不显示在浏览器地址栏中；修改`main.php`的传值接收方式为`$_REQUEST`，使它同时可以接收`post`和`get`传值（定时任务仍采用`get`传值）。
+</details>
+<details open>
   <summary>2021/03/21</summary>
 
 - <a href="https://github.com/PrintNow/ChaoxingSign/issues/6">#6</a> 升级为新版 Server 酱推送通道，原因：微信发布公告将在2021年4月底下线模板消息，故旧版推送通道将于 2021年4月 下线
