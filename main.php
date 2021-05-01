@@ -21,8 +21,8 @@ if (is_cli() && isset($argv)) {
     $account = $param['A'];
     $password = $param['P'];
 }else{
-    $account = get('account');
-    $password = get('password');
+    $account = $_REQUEST['account'];
+    $password = $_REQUEST['password'];
 }
 
 $jar_path = __DIR__ . "/cookie/{$account}.cookie";//保存 Cookie 的路径
