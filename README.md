@@ -19,10 +19,8 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 <details open>
   <summary>2021/05/8</summary>
 
-- `index.html`中新增icp备案和公安网备案部分代码（已注释掉，根据需要自行取消注释并替换内容）
+- `index.html`中新增icp备案和公安网备案部分代码（已注释掉，根据需要自行取消注释并替换内容），部署到国内环境时需要先去备案才能用自己的域名访问
 
-</details>
-<details open>
 
 <details open>
   <summary>2021/05/1</summary>
