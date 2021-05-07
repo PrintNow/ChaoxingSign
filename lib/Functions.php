@@ -55,8 +55,7 @@ function sc_send($text = '', $desp = '', $key = '')
     );
     $context = stream_context_create($opts);
 
-    $result = json_decode(@file_get_contents('https://sc.ftqq.com/' . $key . '.send', false, $context), true);
-    return $result;
+    return json_decode(@file_get_contents('https://sctapi.ftqq.com/' . $key . '.send', false, $context), true);
 }
 
 /**
