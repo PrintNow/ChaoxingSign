@@ -15,6 +15,13 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 <details open>
   <summary>2020/06/13</summary>
 
+- 新增二维码签到
+- 新增登录界面
+</details>
+
+<details open>
+  <summary>2020/06/13</summary>
+
 - 修复 <a href="https://github.com/PrintNow/ChaoxingSign/issues/2">#2</a> 的问题，配置了 Server酱但不推送的问题
 - 更改 判断时间区间的方法
 - 添加 获取课程列表失败，重试2次以判断是API错误
@@ -64,6 +71,10 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
     1. 如果以**网页方式**运行，定时监控 `http://你的域名/main.php?account=你的超星账号&password=你的超星密码` 即可
     2. 如果使用**命令行方式**运行，添加 `crontab` 任务即可，具体添加 `crontab 任务` 方法可以网上搜。
     每天 早上8点到晚上22点之间，每10分钟签到一次 crontab 表达式：`0 */10 8-22 * * * *`
+
+4. 二维码签到
+    -将二维码扫描后的文字填入二维码签到参数处即可
+    ![image](https://www.10086.win/imgs/2021/05/be9b5db6a5a398ab.png)
 
 # √ 运行输出
 签到成功：
