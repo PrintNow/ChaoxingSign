@@ -12,6 +12,14 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 支持普通签到，手势签到，二维码签到，位置签到，拍照签到
 
 # 🎨 更新日志
+
+<details open>
+  <summary>2021/5/7</summary>
+
+- 新增二维码签到
+- 新增登录界面
+</details>
+
 <details open>
   <summary>2020/06/13</summary>
 
