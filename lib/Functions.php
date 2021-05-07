@@ -7,7 +7,7 @@ define("COURSE_LIST_OLD", "http://mooc1-2.chaoxing.com/visit/interaction");//<�
 
 define("TASK_ID", "http://mobilelearn.chaoxing.com/widget/pcpick/stu/index?courseId=%s&jclassId=%s");//获取任务 ID
 
-define("SIGN_API", "https://mobilelearn.chaoxing.com/pptSign/stuSignajax?activeId=%s");//获取任务 ID
+define("SIGN_API", "https://mobilelearn.chaoxing.com/pptSign/stuSignajax?activeId=%s&enc=%s");//获取任务 ID
 define("SIGN_API_OLD", "http://mobilelearn.chaoxing.com/widget/sign/pcStuSignController/preSign?activeId=%s&classId=%s&courseId=%s");//<旧方法>获取任务 ID
 
 /**
@@ -55,7 +55,8 @@ function sc_send($text = '', $desp = '', $key = '')
     );
     $context = stream_context_create($opts);
 
-    return json_decode(@file_get_contents('https://sctapi.ftqq.com/' . $key . '.send', false, $context), true);
+    $result = json_decode(@file_get_contents('https://sc.ftqq.com/' . $key . '.send', false, $context), true);
+    return $result;
 }
 
 /**
