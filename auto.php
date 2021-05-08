@@ -6,7 +6,7 @@ while($run = mysqli_fetch_assoc($list)){
     $account = $run['tel'];
     $password = $run['password'];
     $name = $run['name'];
-    $url = "https://cx.ba7jcm.live/main.php?account=$account&password=$password";
+    $url = "https://这里换成你自己的部署地址/main.php?account=$account&password=$password";
     $single = file_get_contents($url);
     if($single){
         echo $single;
