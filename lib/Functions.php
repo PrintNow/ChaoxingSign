@@ -59,6 +59,25 @@ function sc_send($text = '', $desp = '', $key = '')
 }
 
 /**
+ * Telegram 推送
+ */
+function tg_send($chatID, $message, $token)
+{
+    $url = "https://api.telegram.org/bot" . $token . "/sendMessage?chat_id=" . $chatID;
+    $url = $url . "&text=" . urlencode($message);
+    $ch = curl_init();
+    $optArray = array(
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true
+    );
+    curl_setopt_array($ch, $optArray);
+    $result = curl_exec($ch);
+    curl_close($ch);
+    $result = json_decode($result, true);
+    return $result;
+}
+
+/**
  * 判断是否为命令行模式
  * @return bool
  */

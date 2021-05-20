@@ -2,6 +2,7 @@
 //是否启用 Server 酱 通知
 //true: 启用  false: 不启用
 define("SERVER_CHAN_STATE", true);
+define("TG_STATE", true);
 
 $config = [
     //Server酱：http://sc.ftqq.com/
@@ -22,6 +23,12 @@ $config = [
         ],
         //... 多账号部署
     ],
-
+    'Telegram' => [
+        '' => [
+            'state' => true,
+            'TG_CHAT_ID' => '',
+            'TG_BOT_TOKEN' => '',
+        ]
+    ]
     //TODO: 接入钉钉机器人通知
 ];
