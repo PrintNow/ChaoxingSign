@@ -5,11 +5,12 @@ include_once __DIR__ . "/Config.php";
 
 $tryLogin = 0;//尝试登录次数
 
-//第二个传入区间，是一个数组
-//['08:00:00', '23:00:00'] 表示仅能在这两个区间内进行签到
-//if(timeInterval(time(), ['08:00:00', '23:00:00'])){
-//    die("仅能在 每天 早上8点到晚上22点之间 签到。如果你要修改，请修改 10 行代码".PHP_EOL);
-//}
+// 允许签到的时间范围
+// ['08:00:00', '23:00:00'] 表示仅能在这两个区间内进行签到, 时间使用24小时制
+$enable_time = ['08:00:00', '23:00:00'];
+if(!timeInterval(time(), $enable_time)){
+    die("仅能在 每天 $enable_time[0] - $enable_time[1] 间 签到。如果你要修改，请修改第 10 行代码".PHP_EOL);
+}
 
 if (is_cli() && isset($argv)) {
     $param = getopt('A:P:');
