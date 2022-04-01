@@ -3,6 +3,7 @@
 //true: 启用  false: 不启用
 define("SERVER_CHAN_STATE", true);
 define("TG_STATE", true);
+define("BARK_STATE", true);
 
 $config = [
     //Server酱：http://sc.ftqq.com/
@@ -28,6 +29,12 @@ $config = [
             'state' => true,
             'TG_CHAT_ID' => '',
             'TG_BOT_TOKEN' => '',
+        ]
+    ],
+    'Bark' => [
+        '这里填你的超星账号 1' => [
+            'state' => true,
+            'BARK_PUSH_API' => ''
         ]
     ]
     //TODO: 接入钉钉机器人通知
