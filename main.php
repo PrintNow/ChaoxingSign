@@ -202,6 +202,25 @@ if(strpos($msgTmp,'签到成功') !== false || strpos($msgTmp,'签到失败') !=
     }else{
         echo "未配置 Telegram BOT，不推送消息".PHP_EOL;
     }
+
+    //BARK 推送
+    //先检查是否开启推送 以及 是否配置了“BARK”相关信息
+    if(BARK_STATE && isset($config['Bark'][strval($account)])){
+        if($config['Bark'][$account]['state']){
+            $req = bark_send(
+                "超星自动签到提醒",
+                $msgTmp = "超星自动签到成功\n\n" . $msgTmp,
+                $config['Bark'][$account]['BARK_PUSH_API']
+            );
+            if($req['code'] == 200){
+                echo "Bark 消息推送成功".PHP_EOL;
+            }else{
+                echo "Bark 消息推送失败。".PHP_EOL;
+            }
+        }
+    }else{
+        echo "未配置 Bark，不推送消息".PHP_EOL;
+    }
 }else{
     echo "没有待签到的任务".PHP_EOL;
 }
