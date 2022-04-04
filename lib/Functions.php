@@ -78,6 +78,23 @@ function tg_send($chatID, $message, $token)
 }
 
 /**
+ * Bark 推送
+ */
+function bark_send($title, $content, $api)
+{
+    $url = $api."/".$title."/".$content;
+    $push = curl_init();
+    $timeout = 5;
+    curl_setopt ($push, CURLOPT_URL, $url);
+    curl_setopt ($push, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt ($push, CURLOPT_CONNECTTIMEOUT, $timeout);
+    $result = curl_exec($push);
+    $result = json_decode($result, true);
+    curl_close($push);
+    return $result;
+}
+
+/**
  * 判断是否为命令行模式
  * @return bool
  */
