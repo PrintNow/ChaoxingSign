@@ -156,7 +156,7 @@ function curl_get($url, $cookie_jar = '')
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
 
-    curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4121.0 Safari/537.36 Edg/84.0.495.2");
+    curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (iPhone; CPU iPhone OS 15_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 (device:iPhone13,2) Language/zh-Hans com.ssreader.ChaoXingStudy/ChaoXingStudy_3_5.2.1_ios_phone_202204211530_81 (@Kalimdor)_14895834084271104281");
     curl_setopt($curl, CURLOPT_TIMEOUT, 10);
 
     if (!empty($cookie_jar)) {
