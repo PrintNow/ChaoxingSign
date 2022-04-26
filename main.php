@@ -95,7 +95,7 @@ foreach ($course_list as $val) {
     $res = json_decode($html, true)["activeList"];
     // 由于同一时间同一门课不会出现多个签到，优化遍历代码
     for ($i = 0; $i <= 3; $i ++){
-        if($res[$i]["status"] == 1){
+        if($res[$i]["status"] == 1 && $res[$i]["activeType"] ==2){
             $taskID[] = [
                 $val['courseId'],//课程ID
                 $val['classId'],//班级ID
