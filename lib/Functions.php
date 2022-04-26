@@ -5,7 +5,8 @@ define("LOGIN_API", "https://passport2-api.chaoxing.com/v11/loginregister?uname=
 define("COURSE_LIST", "http://mooc1-api.chaoxing.com/mycourse/backclazzdata");//获取课程 courseId、classId
 define("COURSE_LIST_OLD", "http://mooc1-2.chaoxing.com/visit/interaction");//<旧方法>获取课程 courseId、classId
 
-define("TASK_ID", "http://mobilelearn.chaoxing.com/widget/pcpick/stu/index?courseId=%s&jclassId=%s");//获取任务 ID
+define("TASK_ID", "https://mobilelearn.chaoxing.com/ppt/activeAPI/taskactivelist?courseId=%s&classId=%s");//获取任务 ID
+define("TASK_ID_OLD", "http://mobilelearn.chaoxing.com/widget/pcpick/stu/index?courseId=%s&jclassId=%s");//获取任务 ID
 
 define("SIGN_API", "https://mobilelearn.chaoxing.com/pptSign/stuSignajax?activeId=%s");//获取任务 ID
 define("SIGN_API_OLD", "http://mobilelearn.chaoxing.com/widget/sign/pcStuSignController/preSign?activeId=%s&classId=%s&courseId=%s");//<旧方法>获取任务 ID
@@ -82,15 +83,9 @@ function tg_send($chatID, $message, $token)
  */
 function bark_send($title, $content, $api)
 {
-    $url = $api."/".$title."/".$content;
-    $push = curl_init();
-    $timeout = 5;
-    curl_setopt ($push, CURLOPT_URL, $url);
-    curl_setopt ($push, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt ($push, CURLOPT_CONNECTTIMEOUT, $timeout);
-    $result = curl_exec($push);
-    $result = json_decode($result, true);
-    curl_close($push);
+    $url = $api."/".urlencode($title)."/".urlencode($content);
+    $res = curl_get($url);
+    $result = json_decode($res, true);
     return $result;
 }
 
@@ -161,7 +156,7 @@ function curl_get($url, $cookie_jar = '')
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
 
-    curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4121.0 Safari/537.36 Edg/84.0.495.2");
+    curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (iPhone; CPU iPhone OS 15_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 (device:iPhone13,2) Language/zh-Hans com.ssreader.ChaoXingStudy/ChaoXingStudy_3_5.2.1_ios_phone_202204211530_81 (@Kalimdor)_14895834084271104281");
     curl_setopt($curl, CURLOPT_TIMEOUT, 10);
 
     if (!empty($cookie_jar)) {
