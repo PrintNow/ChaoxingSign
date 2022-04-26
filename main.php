@@ -92,26 +92,16 @@ getTaskID:
 $taskID = [];
 foreach ($course_list as $val) {
     $html = curl_get(sprintf(TASK_ID, $val['courseId'], $val['classId']), $jar_path);
-    $res = selector::select($html, '#startList div', 'css');
-
-    if (isset($res[0])) {
-        if (!is_array($res)) continue;
-        foreach ($res as $k => $v) {
-            $d = selector::select($v, '@activeDetail(.*?)"@', 'regex');
-            $d = str_replace(['(', ')', ''], '', $d);
-            $d = explode(",", $d);
-
-            if(isset($d[1])){
-                if (intval($d[1]) === 2) {
-                    $taskID[] = [
-                        $val['courseId'],//课程ID
-                        $val['classId'],//班级ID
-                        $d[0],//签到任务ID
-                        $val['title'],//课程名
-                        $val['teacherName'],//教师名
-                    ];
-                }
-            }
+    $res = json_decode($html, true)["activeList"];
+    foreach ($res as $k => $v) {
+        if($v["status"] == 1){
+             $taskID[] = [
+                $val['courseId'],//课程ID
+                $val['classId'],//班级ID
+                $v["id"],//签到任务ID
+                $val['title'],//课程名
+                $val['teacherName'],//教师名
+                ];
         }
     }
 }
