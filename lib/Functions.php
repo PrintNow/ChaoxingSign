@@ -83,7 +83,7 @@ function tg_send($chatID, $message, $token)
  */
 function bark_send($title, $content, $api)
 {
-    $url = $api."/".urlencode($title)."/".urlencode($content);
+    $url = $api."/".urlencode($title)."/".urlencode($content)."/?icon=https://s3.missuo.me/images/azB3Ba.jpg";
     $res = curl_get($url);
     $result = json_decode($res, true);
     return $result;
