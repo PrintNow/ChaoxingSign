@@ -144,6 +144,10 @@ foreach ($taskID as $k => $v) {
     if(in_array($v[2], $activeBlackList)) continue;
 
     echo $_1 = "正在签到：{$v[4]}@{$v[3]}";
+
+    // 预签到
+    $preSignRes = trim(curl_get(sprintf(PRE_SIGN_API, $v[0], $v[1], $v[2]), $jar_path));
+    // 正式签到
     $signRes = trim(curl_get(sprintf(SIGN_API, $v[2]), $jar_path));//签到结果
 
     echo $_2 = PHP_EOL."[".date("Y-m-d H:i:s")."]";
