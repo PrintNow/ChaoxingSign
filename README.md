@@ -13,13 +13,17 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 
 # 🎨 更新日志
 <details open>
+- 增加预签到
+- 修复无法签到的Bug
+</details open>
+<details>
   <summary>2022/04/27</summary>
   
 - 新增 Bark 推送 
   > Bark API的末尾不需要添加 / 
 - 修复获取课程失败导致签到失败的Bug 
 - 优化签到效率 
-</details open>
+</details>
 <details>
   <summary>2021/03/21</summary>
 
