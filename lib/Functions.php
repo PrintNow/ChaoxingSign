@@ -8,6 +8,7 @@ define("COURSE_LIST_OLD", "http://mooc1-2.chaoxing.com/visit/interaction");//<�
 define("TASK_ID", "https://mobilelearn.chaoxing.com/ppt/activeAPI/taskactivelist?courseId=%s&classId=%s");//获取任务 ID
 define("TASK_ID_OLD", "http://mobilelearn.chaoxing.com/widget/pcpick/stu/index?courseId=%s&jclassId=%s");//获取任务 ID
 
+define("PRE_SIGN_API", "https://mobilelearn.chaoxing.com/newsign/preSign?courseId=%s&classId=%s&activePrimaryId=%s&general=1&sys=1&ls=1&appType=15&&tid=&ut=s");//预签到API
 define("SIGN_API", "https://mobilelearn.chaoxing.com/pptSign/stuSignajax?activeId=%s");//获取任务 ID
 define("SIGN_API_OLD", "http://mobilelearn.chaoxing.com/widget/sign/pcStuSignController/preSign?activeId=%s&classId=%s&courseId=%s");//<旧方法>获取任务 ID
 
