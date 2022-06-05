@@ -13,6 +13,8 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 
 # 🎨 更新日志
 <details open>
+  <summary>2022/06/06</summary>
+  
 - 增加预签到
 - 修复无法签到的Bug
 </details open>
