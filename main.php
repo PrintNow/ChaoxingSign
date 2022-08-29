@@ -45,7 +45,6 @@ goto takeLogin;//执行登陆
 //获取课程列表
 getCourseList:
 $getCourseListRes = json_decode(curl_get(COURSE_LIST, $jar_path), true);
-
 if(!isset($getCourseListRes['channelList'])){
     if($tryLogin > 1){
         die("[已尝试重新登录2次]获取课程列表失败，请稍后再试。多次出现此问题请前往 https://github.com/PrintNow/ChaoxingSign 提交 Issues".PHP_EOL);
@@ -91,7 +90,7 @@ goto getTaskID;//获取任务 ID
 getTaskID:
 $taskID = [];
 foreach ($course_list as $val) {
-    $html = curl_get(sprintf(TASK_ID, $val['courseId'], $val['classId']), $jar_path);
+    $html = curl_get(sprintf(TASK_ID, $val['courseId'], $val['classId']), $jar_path, "phone");
     $res = json_decode($html, true)["activeList"];
     // 由于同一时间同一门课不会出现多个签到，优化遍历代码
     for ($i = 0; $i <= 3; $i ++){
@@ -147,8 +146,22 @@ foreach ($taskID as $k => $v) {
 
     // 预签到
     $preSignRes = trim(curl_get(sprintf(PRE_SIGN_API, $v[0], $v[1], $v[2]), $jar_path));
+
+    // 位置签到的正则匹配
+    $locationLatitude_gd_re = '/locationLatitude" value="(\d+?\.\d+?)">/';
+    $locationLongitude_gd_re = '/locationLongitude" value="(\d+?\.\d+?)">/';
+    $locationAddress_re = '/locationText" value="(.+?)">/';
+    $isGPSRequired = preg_match($locationLatitude_gd_re,$preSignRes,$latitude_res);
+                     preg_match($locationLongitude_gd_re,$preSignRes,$longitude_res);
+                     preg_match($locationAddress_re,$preSignRes,$address_res);
     // 正式签到
-    $signRes = trim(curl_get(sprintf(SIGN_API, $v[2]), $jar_path));//签到结果
+    if ($isGPSRequired){
+        $signRes = trim(curl_get(sprintf(SIGN_API_WITH_GPS, $v[2],$latitude_res[1],$longitude_res[1],$longitude_res[1],$latitude_res[1],urlencode($address_res[1])), $jar_path));//签到结果
+    }else{
+        $signRes = trim(curl_get(sprintf(SIGN_API, $v[2]), $jar_path));//签到结果
+    }
+
+
 
     echo $_2 = PHP_EOL."[".date("Y-m-d H:i:s")."]";
     if($signRes === "success" || $signRes === "您已签到过了"){
@@ -237,7 +250,7 @@ die;
 //登陆账号
 takeLogin:
 $login_data = json_decode(curl_get(sprintf(LOGIN_API, $account, $password), $jar_path), true);
-
+  
 if (!isset($login_data['status'])) {
     die("登陆失败，原因：API 错误，请再次尝试。多次出现此问题请前往 https://github.com/PrintNow/ChaoxingSign 提交 Issues");
 }

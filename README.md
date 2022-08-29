@@ -9,15 +9,22 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 
 - 签到功能：
 
-支持普通签到，手势签到，~~二维码签到~~，位置签到，~~拍照签到~~
+支持普通签到，手势签到，~~二维码签到~~，位置签到，拍照签到（无图片上传）
 
 # 🎨 更新日志
 <details open>
+  <summary>2022/08/29</summary>
+  
+- 修复无法登录的Bug
+- 修复无法位置签到的Bug
+- 调整了curl的实现方法，方便后期debug
+</details open>
+<details>
   <summary>2022/06/06</summary>
   
 - 增加预签到
 - 修复无法签到的Bug
-</details open>
+</details>
 <details>
   <summary>2022/04/27</summary>
   
