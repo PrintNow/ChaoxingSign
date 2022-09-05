@@ -10,6 +10,7 @@ define("TASK_ID_OLD", "http://mobilelearn.chaoxing.com/widget/pcpick/stu/index?c
 
 define("PRE_SIGN_API", "https://mobilelearn.chaoxing.com/newsign/preSign?courseId=%s&classId=%s&activePrimaryId=%s&general=1&sys=1&ls=1&appType=15&&tid=&ut=s");//预签到API
 define("SIGN_API", "https://mobilelearn.chaoxing.com/pptSign/stuSignajax?activeId=%s");//获取任务 ID
+define("SIGN_API_WITH_GPS", "https://mobilelearn.chaoxing.com/pptSign/stuSignajax?activeId=%s&latitude_gd=%s&longitude_gd=%s&longitude=%s&latitude=%s&address=%s"); //签到(位置)
 define("SIGN_API_OLD", "http://mobilelearn.chaoxing.com/widget/sign/pcStuSignController/preSign?activeId=%s&classId=%s&courseId=%s");//<旧方法>获取任务 ID
 
 /**
@@ -146,27 +147,38 @@ function post($parameter, $default = null, $filter = 'trim')
 /**
  *curl get请求
  */
-function curl_get($url, $cookie_jar = '')
+function curl_get($url, $cookie_jar = '', $header_type="PC")
 {
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);//登陆后要从哪个页面获取信息
-    curl_setopt($curl, CURLOPT_HEADER, false);
+    curl_setopt($curl, CURLOPT_HEADER, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
     //取消 SSL 证书验证
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
 
-    curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (iPhone; CPU iPhone OS 15_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 (device:iPhone13,2) Language/zh-Hans com.ssreader.ChaoXingStudy/ChaoXingStudy_3_5.2.1_ios_phone_202204211530_81 (@Kalimdor)_14895834084271104281");
+    if($header_type == "PC"){
+        curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36");
+    }else{
+        curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (iPhone; CPU iPhone OS 15_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 (device:iPhone13,2) Language/zh-Hans com.ssreader.ChaoXingStudy/ChaoXingStudy_3_5.2.1_ios_phone_202204211530_81 (@Kalimdor)_14895834084271104281");
+    }
+
     curl_setopt($curl, CURLOPT_TIMEOUT, 10);
 
+    // $streamVerboseHandle = fopen("out.txt", 'a+');
+	// curl_setopt($curl, CURLOPT_VERBOSE, 1);
+	// curl_setopt($curl, CURLOPT_STDERR, $streamVerboseHandle);
+  
     if (!empty($cookie_jar)) {
-        curl_setopt($curl, CURLOPT_COOKIEJAR, $cookie_jar); //保存返回的Cookie
-        curl_setopt($curl, CURLOPT_COOKIEFILE, $cookie_jar); //读取现有Cookie
+        curl_setopt($curl, CURLOPT_COOKIEFILE, realpath($cookie_jar)); //读取现有Cookie
+        curl_setopt($curl, CURLOPT_COOKIEJAR, realpath($cookie_jar)); //保存返回的Cookie
     }
 
     $content = curl_exec($curl);
-    curl_close($curl);
+    list($header, $body) = explode("\r\n\r\n", $content, 2);
 
-    return $content;
+    curl_close($curl);
+	// fclose($streamVerboseHandle);
+    return $body;
 }
