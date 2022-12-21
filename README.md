@@ -13,21 +13,25 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 
 # 🎨 更新日志
 <details open>
+  <summary>2022/12/21</summary>
+
+- 增加Go-cqhttp推送，需要配置 `config.php` 文件
+<details open>
   <summary>2022/08/29</summary>
-  
+
 - 修复无法登录的Bug
 - 修复无法位置签到的Bug
 - 调整了curl的实现方法，方便后期debug
 </details open>
 <details>
   <summary>2022/06/06</summary>
-  
+
 - 增加预签到
 - 修复无法签到的Bug
 </details>
 <details>
   <summary>2022/04/27</summary>
-  
+
 - 新增 Bark 推送 
   > Bark API的末尾不需要添加 / 
 - 修复获取课程失败导致签到失败的Bug 
@@ -38,7 +42,7 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 
 - <a href="https://github.com/PrintNow/ChaoxingSign/issues/6">#6</a> 升级为新版 Server 酱推送通道，原因：微信发布公告将在2021年4月底下线模板消息，故旧版推送通道将于 2021年4月 下线
     > 获取本源码后，请配置 `Config.php` 的相关配置
-</details>
+    </details>
 
 <details>
   <summary>2020/06/13</summary>

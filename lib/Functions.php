@@ -92,6 +92,37 @@ function bark_send($title, $content, $api)
 }
 
 /**
+ * Go-cqhttp 推送
+ */
+function Go_cqhttp_send($QQ, $message, $API, $access_token)
+{
+    $postdata = array();
+    if(!empty(preg_match('#send_private_msg#i',"{$qrspeed_message}")))
+    {
+        $postdata['user_id'] = $user_id;
+    }
+    else
+    {
+        $postdata['group_id'] = $group_id;
+    }
+    $postdata['message'] = $message;
+    $postdata['auto_escape'] = true;
+    $ch = curl_init();
+    $optArray = array(
+        CURLOPT_URL => $API,
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => json_encode($postdata),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER => array('Content-Type: application/json','Authorization: Bearer '.$access_token)
+    );
+    curl_setopt_array($ch, $optArray);
+    $result = curl_exec($ch);
+    curl_close($ch);
+    $result = json_decode($result, true);
+    return $result;
+}
+
+/**
  * 判断是否为命令行模式
  * @return bool
  */

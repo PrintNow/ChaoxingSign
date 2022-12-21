@@ -241,6 +241,25 @@ if(strpos($msgTmp,'签到成功') !== false || strpos($msgTmp,'签到失败') !=
     }else{
         echo "未配置 Bark，不推送消息".PHP_EOL;
     }
+    //Go-cqhttp 推送
+    //先检查是否开启推送 以及 是否配置了“”相关信息
+    if(Go_cqhttp_STATE && isset($config['Go-cqhttp'][strval($account)])){
+        if($config['Go-cqhttp'][$account]['state']){
+            $req = Go_cqhttp_send(
+                $config['Go-cqhttp'][$account]['QQ'],
+                $msgTmp = "超星自动签到成功\n\n" . $msgTmp ,
+                $config['Go-cqhttp'][$account]['API'],
+                $config['Go-cqhttp'][$account]['access-token']
+            );
+            if($req['ok'] == true){
+                echo "Go-cqhttp 消息推送成功".PHP_EOL;
+            }else{
+                echo "Go-cqhttp 消息推送失败。".PHP_EOL;
+            }
+        }
+    }else{
+        echo "未配置 Go-cqhttp，不推送消息".PHP_EOL;
+    }
 }else{
     echo "没有待签到的任务".PHP_EOL;
 }
