@@ -94,16 +94,16 @@ function bark_send($title, $content, $api)
 /**
  * Go-cqhttp 推送
  */
-function Go_cqhttp_send($QQ, $message, $API, $access_token)
+function Go_cqhttp_send($QQ, $message, $API, $access_token = null)
 {
     $postdata = array();
-    if(!empty(preg_match('#send_private_msg#i',"{$qrspeed_message}")))
+    if(!empty(preg_match('#send_private_msg#i',$API)))
     {
-        $postdata['user_id'] = $user_id;
+        $postdata['user_id'] = $QQ;
     }
     else
     {
-        $postdata['group_id'] = $group_id;
+        $postdata['group_id'] = $QQ;
     }
     $postdata['message'] = $message;
     $postdata['auto_escape'] = true;
