@@ -6,6 +6,10 @@ define("TG_STATE", false);
 define("BARK_STATE", false);
 define("Go_cqhttp_STATE", false);
 
+//也可以在这里配置账号和密码，如果是自用的话，要供多人使用请留空
+$account = '';
+$password = '';
+
 $config = [
     //Server酱：http://sc.ftqq.com/
     'SERVER_CHAN' => [
@@ -41,8 +45,9 @@ $config = [
     'Go-cqhttp' => [
         '这里填你的超星账号 1' => [
             'state' => true,
-            'API' => '',//示例：http://domain.com:5700/send_private_msg
-            'access-token' => ''
+            'QQ' => '',//填写推送到的QQ号或群号
+            'API' => '',//示例：http://domain.com:5700/send_private_msg，如果是发送到群就是send_group_msg
+            'access-token' => ''//如果有就填上
         ]
     ]
     //TODO: 接入钉钉机器人通知

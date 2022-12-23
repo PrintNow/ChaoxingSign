@@ -6,13 +6,17 @@ include_once __DIR__ . "/Config.php";
 $tryLogin = 0;//尝试登录次数
 
 // 允许签到的时间范围
-// ['08:00:00', '23:00:00'] 表示仅能在这两个区间内进行签到, 时间使用24小时制
-$enable_time = ['08:00:00', '23:00:00'];
+// ['08:00:00', '22:00:00'] 表示仅能在这两个区间内进行签到, 时间使用24小时制
+$enable_time = ['08:00:00', '22:00:00'];
 if(!timeInterval(time(), $enable_time)){
     die("仅能在 每天 $enable_time[0] - $enable_time[1] 间 签到。如果你要修改，请修改第 10 行代码".PHP_EOL);
 }
+if(date("w") == 0 || date("w") == 6){
+    die("仅能在周一到周五签到。如果你要修改，请修改第 14 行代码".PHP_EOL);
+}
 
-if (is_cli() && isset($argv)) {
+if (!empty($account) && !empty($password)) {//在文件中配置的账号和密码
+}elseif (is_cli() && isset($argv)) {//命令行模式
     $param = getopt('A:P:');
     if(!isset($param['A']) || !isset($param['P'])){
         die("使用方法：php main.php -A 你的账号 -P 你的密码".PHP_EOL.PHP_EOL
@@ -22,6 +26,7 @@ if (is_cli() && isset($argv)) {
     $account = $param['A'];
     $password = $param['P'];
 }else{
+    //从HTTP GET方法中读取账号和密码
     $account = get('account');
     $password = get('password');
 }
@@ -201,7 +206,7 @@ if(strpos($msgTmp,'签到成功') !== false || strpos($msgTmp,'签到失败') !=
             }
         }
     }else{
-        echo "未配置 Server酱，不推送消息".PHP_EOL;
+        //echo "未配置 Server酱，不推送消息".PHP_EOL;
     }
 
     //Telegram 推送
@@ -220,7 +225,7 @@ if(strpos($msgTmp,'签到成功') !== false || strpos($msgTmp,'签到失败') !=
             }
         }
     }else{
-        echo "未配置 Telegram BOT，不推送消息".PHP_EOL;
+        //echo "未配置 Telegram BOT，不推送消息".PHP_EOL;
     }
 
     //BARK 推送
@@ -239,7 +244,7 @@ if(strpos($msgTmp,'签到成功') !== false || strpos($msgTmp,'签到失败') !=
             }
         }
     }else{
-        echo "未配置 Bark，不推送消息".PHP_EOL;
+        //echo "未配置 Bark，不推送消息".PHP_EOL;
     }
     //Go-cqhttp 推送
     //先检查是否开启推送 以及 是否配置了“”相关信息
@@ -251,14 +256,14 @@ if(strpos($msgTmp,'签到成功') !== false || strpos($msgTmp,'签到失败') !=
                 $config['Go-cqhttp'][$account]['API'],
                 $config['Go-cqhttp'][$account]['access-token']
             );
-            if($req['ok'] == true){
+            if($req['status'] == 'ok'){
                 echo "Go-cqhttp 消息推送成功".PHP_EOL;
             }else{
                 echo "Go-cqhttp 消息推送失败。".PHP_EOL;
             }
         }
     }else{
-        echo "未配置 Go-cqhttp，不推送消息".PHP_EOL;
+        //echo "未配置 Go-cqhttp，不推送消息".PHP_EOL;
     }
 }else{
     echo "没有待签到的任务".PHP_EOL;
