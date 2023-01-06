@@ -213,3 +213,5 @@ function curl_get($url, $cookie_jar = '', $header_type="PC")
 	// fclose($streamVerboseHandle);
     return $body;
 }
+
+?>

@@ -13,12 +13,6 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 
 # 🎨 更新日志
 <details open>
-  <summary>2022/12/23</summary>
-  
-- 增加Go-cqhttp推送，需要配置 config.php 文件
-- 支持直接在config.php文件配置账号和密码（单用户使用）
-- 默认设置了周六周日不签到
-<details open>
   <summary>2022/08/29</summary>
   
 - 修复无法登录的Bug
