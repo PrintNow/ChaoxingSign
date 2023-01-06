@@ -174,7 +174,7 @@ foreach ($taskID as $k => $v) {
         file_put_contents($signed_path, "\n".$v[2], FILE_APPEND);
         echo $_3 = str_replace("success", "签到成功", $signRes).PHP_EOL.PHP_EOL;
     }else{
-        echo $_3 = "签到失败，错误原因：{$signRes}";
+        echo $_3 = "签到失败，错误原因：{$signRes}".PHP_EOL;
     }
 
     $msgTmp .= $_1.$_2.$_3;
@@ -276,7 +276,7 @@ takeLogin:
 $login_data = json_decode(curl_get(sprintf(LOGIN_API, $account, $password), $jar_path), true);
   
 if (!isset($login_data['status'])) {
-    die("登陆失败，原因：API 错误，请再次尝试。多次出现此问题请前往 https://github.com/PrintNow/ChaoxingSign 提交 Issues");
+    die("登陆失败，原因：API 错误，请再次尝试。多次出现此问题请前往 https://github.com/PrintNow/ChaoxingSign 提交 Issues".PHP_EOL);
 }
 
 if($login_data['status'] !== true){
@@ -286,3 +286,5 @@ if($login_data['status'] !== true){
 
 echo "登陆成功，正在尝试签到...".PHP_EOL;
 goto getCourseList;//获取课程列表
+
+?>
