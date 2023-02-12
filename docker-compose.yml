@@ -7,8 +7,8 @@ services:
     image: php:7.4.33-fpm-alpine
     environment:
       TZ: "Asia/Shanghai"
-    networks:
-      - "host"
+    # links:
+    #   - "go-cqhttp"
     volumes:
       - "/www/wwwroot/website:/usr/share/nginx/html"
       - "/www/wwwroot/config/www.conf:/usr/local/etc/php-fpm.d/www.conf"
