@@ -81,7 +81,7 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 
     直接下载：https://github.com/xiwangly2/ChaoxingSign/archive/master.zip
     
-    克隆源码：`git clone https://github.com/xiwangly2/ChaoxingSign`
+    克隆源码：`git clone https://github.com/xiwangly2/ChaoxingSign.git`
 
 2. 🚀 运行
     1. 上传到**网站根目录**运行
