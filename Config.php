@@ -5,6 +5,7 @@ define("SERVER_CHAN_STATE", false);
 define("TG_STATE", false);
 define("BARK_STATE", false);
 define("Go_cqhttp_STATE", false);
+date_default_timezone_set("Asia/Shanghai");
 
 //也可以在这里配置账号和密码，如果是自用的话，要供多人使用请留空
 $account = '';
