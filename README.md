@@ -13,6 +13,10 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 
 # 🎨 更新日志
 <details open>
+  <summary>2023/2/12</summary>
+  
+- 增加了docker-compose运行的支持，运行`run-docker.sh`即可完成一键部署
+<details open>
   <summary>2022/12/23</summary>
   
 - 增加Go-cqhttp推送，需要配置 config.php 文件
