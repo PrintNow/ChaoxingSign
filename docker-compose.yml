@@ -28,3 +28,14 @@ services:
     volumes:
       - "/www/wwwroot/website:/usr/share/nginx/html"
       - "/www/wwwroot/config/default.conf:/etc/nginx/conf.d/default.conf"
+
+  # go-cqhttp:
+  #   image: xiwangly/go-cqhttp
+  #   container_name: "go-cqhttp"
+  #   restart: always
+  #   ports:
+  #     - "5700:5700"
+  #   environment:
+  #     TZ: "Asia/Shanghai"
+  #   volumes:
+  #     - "/www/wwwroot/go-cqhttp:/go-cqhttp"
