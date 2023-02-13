@@ -12,7 +12,7 @@ services:
     volumes:
       - "/www/wwwroot/website:/usr/share/nginx/html"
       - "/www/wwwroot/config/www.conf:/usr/local/etc/php-fpm.d/www.conf"
-      - "/www/wwwroot/config/php.ini:/usr/local/etc/php-8.2.2/php.ini"
+      - "/www/wwwroot/config/php.ini:/usr/local/etc/php/php.ini"
 
   nginx:
     image: nginx:1.23.3
