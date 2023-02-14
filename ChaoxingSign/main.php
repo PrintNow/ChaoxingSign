@@ -134,7 +134,7 @@ if (count($taskID) > 0) {
 
 file_put_contents($signed_path, "");//没有签到任务了，将其置为空
 echo "[getTaskID]没有待签到的任务".PHP_EOL;
-file_put_contents("logs/logs.log","【".date("Y-m-d H:i:s")."】"."没有待签到的任务".PHP_EOL);
+//file_put_contents("logs/logs.log","【".date("Y-m-d H:i:s")."】"."没有待签到的任务".PHP_EOL);
 die;
 
 
