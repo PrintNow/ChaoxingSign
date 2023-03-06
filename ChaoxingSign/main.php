@@ -7,12 +7,16 @@ $tryLogin = 0;//尝试登录次数
 
 // 允许签到的时间范围
 // ['08:00:00', '23:00:00'] 表示仅能在这两个区间内进行签到, 时间使用24小时制
+
 $enable_time = ['08:00:00', '22:00:00'];
 if(!timeInterval(time(), $enable_time)){
-    die("仅能在 每天 $enable_time[0] - $enable_time[1] 间 签到。如果你要修改，请修改第 10 行代码".PHP_EOL);
+    die("仅能在 每天 $enable_time[0] - $enable_time[1] 间 签到。".PHP_EOL);
+}
+if(timeInterval(time(), ['08:20:00', '08:50:00']) || timeInterval(time(), ['10:10:00', '10:40:00']) || timeInterval(time(), ['14:00:00', '14:20:00']) || timeInterval(time(), ['15:50:00', '16:10:00'])){
+    die("只能在指定的时间签到".PHP_EOL);
 }
 if(date("w") == 0 || date("w") == 6){
-    die("仅能在周一到周五签到。如果你要修改，请修改第 14 行代码".PHP_EOL);
+    die("仅能在周一到周五签到。".PHP_EOL);
 }
 
 if (!empty($account) && !empty($password)) {//在文件中配置的账号和密码
@@ -52,7 +56,7 @@ getCourseList:
 $getCourseListRes = json_decode(curl_get(COURSE_LIST, $jar_path), true);
 if(!isset($getCourseListRes['channelList'])){
     if($tryLogin > 1){
-        die("[已尝试重新登录2次]获取课程列表失败，请稍后再试。多次出现此问题请前往 https://github.com/PrintNow/ChaoxingSign 提交 Issues".PHP_EOL);
+        die("[已尝试重新登录2次]获取课程列表失败，请稍后再试。多次出现此问题请提交 Issues".PHP_EOL);
     }else{
         $tryLogin += 1;
         echo "[getCourseList]获取课程列表失败，可能是 cookie 过期，正在尝试第{$tryLogin}次重新登录".PHP_EOL;
@@ -277,7 +281,7 @@ takeLogin:
 $login_data = json_decode(curl_get(sprintf(LOGIN_API, $account, $password), $jar_path), true);
   
 if (!isset($login_data['status'])) {
-    die("登陆失败，原因：API 错误，请再次尝试。多次出现此问题请前往 https://github.com/PrintNow/ChaoxingSign 提交 Issues".PHP_EOL);
+    die("登陆失败，原因：API 错误，请再次尝试。多次出现此问题请提交 Issues".PHP_EOL);
 }
 
 if($login_data['status'] !== true){
