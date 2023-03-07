@@ -13,6 +13,8 @@ if(!timeInterval(time(), $enable_time)){
     die("仅能在 每天 $enable_time[0] - $enable_time[1] 间 签到。".PHP_EOL);
 }
 if(timeInterval(time(), ['08:20:00', '08:50:00']) || timeInterval(time(), ['10:10:00', '10:40:00']) || timeInterval(time(), ['14:00:00', '14:20:00']) || timeInterval(time(), ['15:50:00', '16:10:00'])){
+}
+else{
     die("只能在指定的时间签到".PHP_EOL);
 }
 if(date("w") == 0 || date("w") == 6){
