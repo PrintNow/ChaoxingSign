@@ -92,6 +92,37 @@ function bark_send($title, $content, $api)
 }
 
 /**
+ * Go-cqhttp 推送
+ */
+function Go_cqhttp_send($QQ, $message, $API, $access_token = null)
+{
+    $postdata = array();
+    if(!empty(preg_match('#send_private_msg#i',$API)))
+    {
+        $postdata['user_id'] = $QQ;
+    }
+    else
+    {
+        $postdata['group_id'] = $QQ;
+    }
+    $postdata['message'] = $message;
+    $postdata['auto_escape'] = true;
+    $ch = curl_init();
+    $optArray = array(
+        CURLOPT_URL => $API,
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => json_encode($postdata),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER => array('Content-Type: application/json','Authorization: Bearer '.$access_token)
+    );
+    curl_setopt_array($ch, $optArray);
+    $result = curl_exec($ch);
+    curl_close($ch);
+    $result = json_decode($result, true);
+    return $result;
+}
+
+/**
  * 判断是否为命令行模式
  * @return bool
  */
@@ -154,9 +185,17 @@ function curl_get($url, $cookie_jar = '', $header_type="PC")
     curl_setopt($curl, CURLOPT_HEADER, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
-    //取消 SSL 证书验证
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    if(parse_url($url)['scheme'] == 'https'){
+        //验证SSL
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, TRUE);
+        //验证域名是否匹配
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+    }
+    else{
+        //取消 SSL 证书验证
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    }
 
     if($header_type == "PC"){
         curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36");
@@ -182,3 +221,5 @@ function curl_get($url, $cookie_jar = '', $header_type="PC")
 	// fclose($streamVerboseHandle);
     return $body;
 }
+
+?>

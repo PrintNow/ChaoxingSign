@@ -13,6 +13,16 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 
 # 🎨 更新日志
 <details open>
+  <summary>2023/2/12</summary>
+  
+- 增加了docker-compose运行的支持，运行`run-docker.sh`即可完成一键部署
+<details open>
+  <summary>2022/12/23</summary>
+  
+- 增加Go-cqhttp推送，需要配置 config.php 文件
+- 支持直接在config.php文件配置账号和密码（单用户使用）
+- 默认设置了周六周日不签到
+<details open>
   <summary>2022/08/29</summary>
   
 - 修复无法登录的Bug
@@ -36,14 +46,14 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 <details>
   <summary>2021/03/21</summary>
 
-- <a href="https://github.com/PrintNow/ChaoxingSign/issues/6">#6</a> 升级为新版 Server 酱推送通道，原因：微信发布公告将在2021年4月底下线模板消息，故旧版推送通道将于 2021年4月 下线
+- <a href="https://github.com/xiwangly2/ChaoxingSign/issues/6">#6</a> 升级为新版 Server 酱推送通道，原因：微信发布公告将在2021年4月底下线模板消息，故旧版推送通道将于 2021年4月 下线
     > 获取本源码后，请配置 `Config.php` 的相关配置
 </details>
 
 <details>
   <summary>2020/06/13</summary>
 
-- 修复 <a href="https://github.com/PrintNow/ChaoxingSign/issues/2">#2</a> 的问题，配置了 Server酱但不推送的问题
+- 修复 <a href="https://github.com/xiwangly2/ChaoxingSign/issues/2">#2</a> 的问题，配置了 Server酱但不推送的问题
 - 更改 判断时间区间的方法
 - 添加 获取课程列表失败，重试2次以判断是API错误
 </details>
@@ -51,7 +61,7 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 <details>
   <summary>2020/05/27</summary>
 
-- 修复 <a href="https://github.com/PrintNow/ChaoxingSign/issues/1">#1</a>
+- 修复 <a href="https://github.com/xiwangly2/ChaoxingSign/issues/1">#1</a>
 - 更改 获取课程、签到 API
 - 添加 手势、位置、二维码一键签到
 - 添加 Server酱 微信推送，需要配置 `config.php` 文件
@@ -69,9 +79,9 @@ PHP 版超星学习用自动签到，支持多用户签到，二次开发便捷�
 # 🧀 使用方法
 1. 下载源码：
 
-    直接下载：https://github.com/PrintNow/ChaoxingSign/archive/master.zip
+    直接下载：https://github.com/xiwangly2/ChaoxingSign/archive/master.zip
     
-    克隆源码：`git clone https://github.com/PrintNow/ChaoxingSign`
+    克隆源码：`git clone https://github.com/xiwangly2/ChaoxingSign.git`
 
 2. 🚀 运行
     1. 上传到**网站根目录**运行

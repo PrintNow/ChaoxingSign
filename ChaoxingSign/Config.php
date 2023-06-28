@@ -1,9 +1,15 @@
 <?php
 //是否启用 Server 酱 通知
 //true: 启用  false: 不启用
-define("SERVER_CHAN_STATE", true);
-define("TG_STATE", true);
-define("BARK_STATE", true);
+define("SERVER_CHAN_STATE", false);
+define("TG_STATE", false);
+define("BARK_STATE", false);
+define("Go_cqhttp_STATE", false);
+date_default_timezone_set("Asia/Shanghai");
+
+//也可以在这里配置账号和密码，如果是自用的话，要供多人使用请留空
+$account = '';
+$password = '';
 
 $config = [
     //Server酱：http://sc.ftqq.com/
@@ -25,7 +31,7 @@ $config = [
         //... 多账号部署
     ],
     'Telegram' => [
-        '' => [
+        '这里填你的超星账号 1' => [
             'state' => true,
             'TG_CHAT_ID' => '',
             'TG_BOT_TOKEN' => '',
@@ -36,6 +42,16 @@ $config = [
             'state' => true,
             'BARK_PUSH_API' => ''
         ]
+    ],
+    'Go-cqhttp' => [
+        '这里填你的超星账号 1' => [
+            'state' => true,
+            'QQ' => '',//填写推送到的QQ号或群号
+            'API' => '',//示例：http://domain.com:5700/send_private_msg，如果是发送到群就是send_group_msg
+            'access-token' => ''//如果有就填上
+        ]
     ]
     //TODO: 接入钉钉机器人通知
 ];
+
+?>
